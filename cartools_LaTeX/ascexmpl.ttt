@@ -1,0 +1,52 @@
+\begin{table}
+\caption{Stochastic Model Predictions}
+\centering
+\small
+\begin{tabular}{|c|ccc|ccc|cc|}
+ \hline
+ \hline
+&\multicolumn{3}{c|}{Side-by-Side Merge}&\multicolumn{3}{c|}{Zipper Merge}&\multicolumn{2}{c|}{Pairs Test}\\
+
+ & Mean & SE & $95\%$ C.I. & Mean & SE & $95\%$ C.I. &  Mean Difference & $P-value$\\
+\hline
+$u_A$ at $x_e$ & 44.7& 12.9&(19.4,  69.9) & 52.3& 14.5& (23.9, 80.7) &-4.5 & 0.04\\
+$k_A$ at $x_e$ & 70.2& 53.4& (-34.5,  175)& 63.3& 110 & (-152, 279)& 6.3 &0\\
+$q_A$ at $x_e$ & 1134& 445& (262, 2006)& 1181& 265 & (662, 1700)& -47 & 0.64\\
+\hline
+$u_D$ at $x_0$ & 31.1& 6.0& (19.3, 42.86) & 44.3& 8.4&(27.8, 60.8)&-13.2 & 0\\
+$k_D$ at $x_0$ & 43.7& 9.4& (25.3, 62.1)&37.4& 7.3 & (23.1, 51.7)&6.3 & 0\\
+$q_D$ at $x_0$ & 1903& 542& (841, 2965)& 1804& 333 & (1151, 2457)&100 & 0.067\\
+\hline
+$w$     & 10.5 & 3.6 & (3.4, 17.6)& 7.9 & 2.3 & (3.39, 12.4)& 2.6 & 0 \\
+$w'$     & 7.1 & 3.6 & (0.04, 14.2)& 1.5 & 2.3 & (-3.0, 6.0)& 2.6 & 0 \\
+\hline
+\hline
+\end{tabular}
+\label{tab:tab2}
+\normalsize
+\end{table}
+\efloatseparator
+ 
+\begin{table}
+\caption{Deterministic Model Predictions}
+\centering
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+\hline
+&Side-by-Side Merge&Zipper Merge\\
+\hline
+ $u_D$ at $x_0$  & 39.2 & 53.1 \\
+ $k_D$ at $x_0$  & 41.7& 60.0 \\
+ $q_D$ at $x_0$  & 2024&  3161 \\
+ \hline
+$w$     & 7.6 &   6.4 \\
+$w'$     & 0.7 &  0  \\
+ \hline
+\hline
+\end{tabular}
+\label{tab:tab1}
+\normalsize
+\end{table}
+\efloatseparator
+ 

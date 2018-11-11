@@ -1,0 +1,75 @@
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot02.pdf}
+\caption{Schematic diagram of a bottleneck.}
+\label{schematic}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot01.pdf}
+\caption{A time-space trajectory of a ``zipper merge.''}
+\label{zipmodel}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot04.pdf}
+\caption{A time-space trajectory of a ``side-by-side merge.''}
+\label{sbsmodel}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot09.pdf}
+\caption{A sample time-space trajectory of a ``zipper merge'' produced by the hybrid car-following simulation model.}
+\label{stochmodel}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot03.pdf}
+\caption{A sample draw from a Brownian bridge model of speed. }
+\label{bbmodel}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+\begin{tikzpicture}[node distance=3cm]
+\node (start) [startstop] {Desire-Line Generator};
+\node (bb) [startstop, below of = start, yshift =-15] {Arrival Analyzer};
+\node (lane1) [startstop, below of = bb, yshift =-15, xshift = -1.25in] {Lane Analyzer};
+\node (lane2) [startstop, below of = bb, yshift =-15, xshift = 1.25in] {Lane Analyzer};
+\node (tuxfix) [startstop, below of = lane1, yshift =-15, xshift = 1.25in] {Merge Analyzer};
+\node (mofe) [startstop, below of = tuxfix, yshift =-15, xshift = 0in] {Measures of Effectiveness};
+\draw [arrow] (start) --  node[anchor=south] {$\mathbf{T}$} (bb);
+\draw [arrow] (bb) --  node[anchor=west] {$\mathbf{T1}$} (lane1);
+\draw [arrow] (bb) -- node[anchor=east] {$\mathbf{T2}$} (lane2);
+\draw [arrow] (lane1) -- node[anchor=west] {$\mathbf{TF1}$} (tuxfix);
+\draw [arrow] (lane2) -- node[anchor=east] {$\mathbf{TF2}$} (tuxfix);
+\draw [arrow] (tuxfix) -- node[anchor=south] {$\mathbf{TF}$}  (mofe);
+\end{tikzpicture}
+\caption{Hybrid Car-Following Model flow chart.}
+\label{flow}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\centering
+%\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+\includegraphics[width = 7in]{Rplot05.pdf}
+\caption{Results for the  ``zipper merge'' shown in Figure \ref{stochmodel}.}
+\label{bbmodelAD}
+\end{figure}
+\efloatseparator
+ 
