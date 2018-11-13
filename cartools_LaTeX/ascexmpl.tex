@@ -7,14 +7,13 @@
 \usetikzlibrary{shapes.geometric, arrows}
 \tikzstyle{arrow} = [thick,->,>=stealth]
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum height =1cm, text centered, draw=black, fill=blue!10]
-%\usepackage{amsbsy}
-%\usepackage{times}
-%\usepackage{subfigure}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{authblk}
 \usepackage[colorlinks=true,citecolor=red,linkcolor=black]{hyperref}
 \usepackage[colorlinks=true,citecolor=red,linkcolor=black]{hyperref}
+
+
 \begin{document}
 %
 % You will need to make the title all-caps
@@ -26,14 +25,15 @@
 \maketitle
 \begin{abstract} Traffic data are inherently noisy. As the name implies unwanted. Historically, traffic noise has been  treated as a nuisance variable and ignored. It is now possible to introduce the effects of noise into the decision-making process with the advent of high speed computing and advances in statistics. The principal goals of this paper is to predict and explain traffic breakdown at a bottleneck with the aid of a stochastic model. A Brownian motion model is at the core of the model development. It is introduced into a car-following model structure where driver group behavior is assumed to be root cause of breakdown. Results from a controlled experiment are used to sustain the assumption. This model and a deterministic traffic dynamics model are incorporated into a \emph{hybrid} model to investigate a bottleneck where a two-lane freeway merges into one lane. This framework allows us to analyze the driver group behavior as the drivers' approach, pass through with the option of passing other vehicles, and exit a bottleneck. Two merging protocols are investigated, the zipper and side-by-side merge. Average wait time for a side-by-side merge is estimated to be more than 4.5 times greater  than  a zipper merge. Since drivers' are self optimizers, implementing a zipper merge traffic control regulation as a matter of policy is deemed infeasible. The feasibility of adapting the hybrid car-following model into an $ITS$ control system and for traffic safety studies are discussed.
 \end{abstract}
-\KeyWords{Traffic Breakdown}
+\KeyWords{Traffic breakdown, car-following, congestion, control, intelligent systems,  stochastic processes }
 %
+     
 \section{Introduction}
 Predicting and explaining traffic breakdown at a bottleneck is main goal and focus of this paper. There is no argument that traffic mix, geometric design, traffic management and control, weather conditions are contributing factors in explaining a breakdown event. In this paper, they are assumed to play a secondary role. Driver group behavior,  an informal group of drivers with various driving skills, levels of alertness and aggressiveness and attitudes toward safety and risk, is assumed to play a central role. 
 
 Another goal of this paper is describe the breakdown process as simply as possible. That means using analysis tools, mathematical models, that are easy to understand. To help in this regard, the paper focuses on bottleneck breakdown using two merging protocols, \emph{zipper} and \emph{side-by-side} merges.
 
-\emph{Why is it so difficult to explain and reliably predict traffic breakdown?} Traffic data are extremely noisy (volatile). Traffic analysis tools used today are not equipped to do so. Historically, researchers have treated noise as a nuisance variable. This is an eloquent  approach because their \emph{deterministic} models can explain fundamental relationship between speed, traffic density and flow. 
+\emph{Why is it so difficult to explain and reliably predict traffic breakdown?} Traffic data are extremely noisy (volatile). Historically, researchers have treated noise as a nuisance variable. This is an eloquent  approach because their \emph{deterministic} models can explain fundamental relationship between speed, traffic density and flow. These methods give an incomplete explanation of traffic breakdown. The  research literature is rich with attempts to bring more clarity to solving this complex problem.  Factors explaining breakdown and its consequences include: speed volatility  \cite{WAGNER20121384}; vehicle clustering and density \cite{CASTILLO2001367}   \cite{GALTIER2012167} \cite{KISH2000271} \cite{MAHNKE20051} \cite{WEITS1992115}; driver behavior and headway distribution  \cite{OU2018105}; and capacity, delay, control and rerouting \cite{HU2018254} \cite{SMULDERS1990221} \cite{VODOPIVEC201722}. 
 
 In this paper, a concerted effort is made to introduce traffic noise into the analysis by using \emph{stochastic models}. Our effort requires that the breakdown process be dissected, analyzed and then resembled. The resulting model, which we call a \emph{hybrid car-following model,} consists of both deterministic and stochastic model components. This framework allows us to analyze the driver group behavior as the drivers' approach, pass through, pass other vehicles, and exit a bottleneck.
 
@@ -53,7 +53,7 @@ Two merging protocols are investigated: (1) the \emph{zipper merge} and (2) the 
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot02.pdf}
+\includegraphics[width = 5.5in]{Rplot02.pdf}
 \caption{Schematic diagram of a bottleneck.}
 \label{schematic}
 \end{figure}
@@ -65,7 +65,7 @@ Drivers are assumed to be self optimizers.  They operate their vehicles to minim
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot01.pdf}
+\includegraphics[width = 5.5in]{Rplot01.pdf}
 \caption{A time-space trajectory of a ``zipper merge.''}
 \label{zipmodel}
 \end{figure}
@@ -74,7 +74,7 @@ Drivers are assumed to be self optimizers.  They operate their vehicles to minim
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot04.pdf}
+\includegraphics[width = 5.5in]{Rplot04.pdf}
 \caption{A time-space trajectory of a ``side-by-side merge.''}
 \label{sbsmodel}
 \end{figure}
@@ -83,7 +83,7 @@ Drivers are assumed to be self optimizers.  They operate their vehicles to minim
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot09.pdf}
+\includegraphics[width = 5.5in]{Rplot09.pdf}
 \caption{A sample time-space trajectory of a ``zipper merge'' produced by the hybrid car-following simulation model.}
 \label{stochmodel}
 \end{figure}
@@ -101,11 +101,11 @@ The \emph{root cause of traffic breakdown in this experiment} is twofold: (1) th
 
 \subsubsection{A Stochastic Model of Speed}
 
-To explain this behavior with a speed model, speed is treated as a random variable $U$ where speed volatility, as before, is denoted as $\sigma_U$.  Since speed varies with time, the challenge is  to specify a stochastic speed model, The following model is investigated: $U(t) = f(\bar{u},\sigma_U,k,t)$ where $\bar{u}$ is the fixed speed that is specified for the ring road experiment, $\sigma_U$ is assumed to be a function of $k$. Since $n$ and $l$ are fixed, our first impulse is to treat $k$ as a constant. This assumption has great appeal for this paper because it meets our goal to explain breakdown with simple model structures. By treating  $k$ as a constant,  we derive the following flow model: $Q(t) = k \cdot U(t)$. Flow is an important measure of effectiveness and will be evidentally used to estimate bottleneck capacity $c$.
+To explain this behavior with a speed model, speed is treated as a random variable $U$ where speed volatility, as before, is denoted as $\sigma_U$.  Since speed varies with time, the challenge is  to specify a stochastic speed model, The following model is investigated: $U(t) = f(\bar{u},\sigma_U,k,t)$ where $\bar{u}$ is the fixed speed that is specified for the ring road experiment, $\sigma_U$ is assumed to be a function of $k$. Since $n$ and $l$ are fixed, our first impulse is to treat $k$ as a constant. This assumption has great appeal for this paper because it meets our goal to explain breakdown with simple model structures. By treating  $k$ as a constant,  we derive the following flow model: $Q(t) = k \cdot U(t)$. Flow is an important measure of effectiveness and will be evidently used to estimate bottleneck capacity $c$.
 
 Upon further investigation, we observe that vehicle interaction  takes place and vehicle clusters form and dissipate with time. Thus, $k$ cannot be a constant. The only time, density is a constant is when the experiment is initiated at time $t = 0$: $k_0 = n/l$. Unfortunately, the $Q(t) = k \cdot U(t)$ model must be rejected. For $t > 0$, density and flow must be treated as random variables. 
 
-Both density and flow are modeled as $K(t)$ and $Q(t)$ diffusion models using field data averaged over fifteen time intervals, thus they are macroscale models  \cite{pjo2017}. The study shows traffic density is a more reliable predictor of traffic breakdown than flow, illustrating its  importance. Therefore,  a $K(t)$ diffusion model appears to be a good choice model for simulating traffic behavior on the ring road.  While it is theoretically possible  to calibrate a $K(t)$ diffusion model, it is impossible to obtain field density data on a microscale scale. The same can be said for obtaining flow data of this scale. A different tactic is needed.
+Both density and flow are modeled as $K(t)$ and $Q(t)$ diffusion models using field data averaged over fifteen time intervals, thus they are macroscale models  \cite{pjo2017}. The study shows traffic density is a more reliable predictor of traffic breakdown than flow, illustrating its  importance. Therefore,  a $K(t)$ diffusion model appears to be a good choice model for simulating traffic behavior on the ring road.  While it is possible  to calibrate a $K(t)$ diffusion model \cite{KISH2000271}, it is difficult to obtain field density data on a microscale scale. The same can be said for obtaining flow data of this scale. A different tactic is needed.
 
 A \emph{Brownian bridge} model, $U(t) = f(\bar{u},\sigma_U,W,k,t)$ where $W$ = white noise, explains breakdown for the ring road experiment. As will be shown presently, this model  serves our needs (1) to explain breakdown at a bottleneck and (2) to estimate measures of performance at a bottleneck. The discussion above suggests stochastic process models of $K(t)$ and $Q(t)$ are needed. In lieu of deriving $K(t)$ and $Q(t)$ models, we use a car-following simulation model, a \emph{hybrid car-following model}, sampling and $t-x$ trajectories to obtain the information that we need. 
 
@@ -121,7 +121,7 @@ Traffic breakdown at a bottleneck is complicated and difficult to predict becaus
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot03.pdf}
+\includegraphics[width = 5.5in]{Rplot03.pdf}
 \caption{A sample draw from a Brownian bridge model of speed. }
 \label{bbmodel}
 \end{figure}
@@ -153,13 +153,13 @@ Words of warning. Side-by-side trajectories are often difficult to identify beca
 
 \subsubsection{A Safe Car-Following Rule.} 
 
-Independent draws are made using Eq.(\ref{eq:eq1}), thus the car-following trajectories shown in Figure \ref{bbmodel} were obtained strictly by chance. The trajectories are called \emph{desire-line trajectories.} No provision is made to classify drivers as aggressive, passive,  etc. However, the trajectories can be used to classify driver behavior if we wish. For practical application in transportation, it is  most important to have a wide variety of drivers represented in a simulation. In this example, both  drivers  are considered  to be aggressive. The following vehicle driver  is considered to be more aggressive than the lead vehicle driver because he or she passes as it goes through  the merge zone.  
+Independent draws are made using Eq.(\ref{eq:eq1}), thus the car-following trajectories shown in Figure \ref{bbmodel} were obtained strictly by chance. The trajectories are called \emph{desire-line trajectories.} No provision is made to classify drivers as aggressive, passive,  etc. However, the trajectories can be used to classify driver behavior if we wish. For practical application in transportation, it is  most important to have a wide variety of drivers represented in a simulation. In this example, the first or lead vehicle driver is considered  to be aggressive. The following vehicle driver  is considered to be a non-aggressive or passive driver  because he or she decelerates in the merge zone and tends to maintain a constant speed through most of the downstream zone.  
 
 A safe car-following rule applied to these drivers and to all drivers in a simulation. The gap, the distance between lead vehicle and front bumper of the following vehicle, must be at least one-vehicle length for each ten mph. We denote it as $h_{safe}(u, l_{vehicle})$ where $u$ and $l_{vehicle}$ are speed and vehicle length. This rule applies everywhere except in the  merge zone. While the rule is simply enough to program, implementing it requires the rule to be applied differently in the upstream and downstream zones and to a variety of circumstances. 
 
 \subsubsection{A Time Varying Acceleration Model.}
 
-The smooth $t-x$ curve shown in Figure \ref{sbsmodel} is a good example on how it simulates driver behavior.  ``Realistically, acceleration is not a constant in time. Acceleration capabilities decrease as the speed increases.\cite{LiliBook}''  The model has the following form:
+The smooth $t-x$ curve shown in Figure \ref{sbsmodel} is a good example on how a time varying acceleration model simulates driver behavior.  ``Realistically, acceleration is not a constant in time. Acceleration capabilities decrease as the speed increases. \cite{LiliBook}''  The model has the following form:
 
 \begin {equation}
  \ddot{x} = \frac{d^2x}{dt^2} = \frac{du}{dt} =  a - b \cdot t \label{eq:eq3}
@@ -238,7 +238,7 @@ How does the hybrid car-following model find these times? The  \emph{desire}  ti
 \item [ Desire-Line Generator] produces a $\mathbf{T}$ matrix for $n$ =10 vehicles. $\mathbf{T}$ contains $n$ =10  $T_{vehicle}^*$ times but they are unknown values after performing this step.
 \item [ Arrival Analyzer] sorts the information of $\mathbf{T}$ by lane number and stores it in $\mathbf{T1}$ and  $\mathbf{T2}$.
 \item [ Lane Analyzer] independently inspects each following vehicle for safety violations from $\mathbf{T1}$ and  $\mathbf{T2}$. If a violation is found over some time range, the violation is corrected or fixed using the Time Varying Acceleration Model procedure given previously in the \textbf{Methods} section.  The information of $u(t)$ and $x(t)$  are replaced and stored in   the appropriate matrix $\mathbf{TF1}$ or  $\mathbf{TF2}$.
-\item [ Merge Analyzer] merges the information in $\mathbf{TF1}$ or  $\mathbf{TF2}$. First, by ordering vehicle arrivals by arrival time at $x_0$ and stores them in $\mathbf{TF}$, contain values of  $T^*_1, T^*_2,\ldots,T^*_{10}$. Not that these values are  not the same values found in the Desire-Line Generator. Second, after performing similar steps to those given for the  Lane Analyzer step, corrections are made. This second set of corrections are stored in $\mathbf{TF}$. This matrix contains $T_1, T_2,\ldots,T_{10}$, the departure times from the bottleneck at $x_0$. These points are special because drivers realize by the time they reach location $x_0$ that corrections must be completed to proceed safely. In other words, drivers may take corrective action prior to reaching $x_0$ and before reaching $x_e$. 
+\item [ Merge Analyzer] merges the information in $\mathbf{TF1}$ or  $\mathbf{TF2}$. First, by ordering vehicle arrivals by arrival time at $x_0$ and stores them in $\mathbf{TF}$, contain values of  $T^*_1, T^*_2,\ldots,T^*_{10}$. Note that these values are  not the same values found in the Desire-Line Generator. Second, after performing similar steps to those given for the  Lane Analyzer step, corrections are made. This second set of corrections are stored in $\mathbf{TF}$. This matrix contains $T_1, T_2,\ldots,T_{10}$, the departure times from the bottleneck at $x_0$. These points are special because drivers realize by the time they reach location $x_0$ that corrections must be completed to proceed safely. In other words, drivers may take corrective action prior to reaching $x_0$ and before reaching $x_e$. 
 
 \item [ Measure of Effectiveness] use the information contained in $\mathbf{TF}$ to estimate wait times $w$ and $t-x$ plots for a simulation.
 \end{description}
@@ -265,7 +265,7 @@ The hybrid car-following model is limited to zipper and side-by-side merges at a
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 7in]{Rplot05.pdf}
+\includegraphics[width = 5.5in]{Rplot05.pdf}
 \caption{Results for the  ``zipper merge'' shown in Figure \ref{stochmodel}.}
 \label{bbmodelAD}
 \end{figure}
@@ -322,7 +322,7 @@ Moreover, doubling $\sigma_U$ to 10 mph results in gridlock. Hybrid car-followin
 
 \noindent \emph{4. Can traffic noise be controlled?}
 
- Conceptually, it can be controlled  by applying \emph{Intelligent Transportation Systems} ($ITS$) in a smart city environment, an area that uses different types of electronic data collection sensors to supply information to manage resources: (1) Collect GPS floating car data, (2) Use a real-time, micro-scale forecast algorithm \cite{trieber}, and (3) Use GPS to transmit individualized ``optimized'' driver instruction. Floating car data are  real time, tracking data of $u_{vehicle}(t)$ and  $x_{vehicle}(t)$, which are transmitted using wireless technology and stored on a central controller computer \cite{tarnoff}. A real-time micro-scale forecast algorithm provides ``optimized'' $u_{driver}(t)$ and  $x_{driver}(t)$, provided by the tracking data. The ``optimized'' data are transmitted to on-board control installed in a vehicle \cite{5gaa}. The hybrid car-following model is a  micro-scale model that can be adapted to this purpose. 
+ Conceptually, it can be controlled  by applying \emph{Intelligent Transportation Systems} ($ITS$) in a smart city environment, an area that uses different types of electronic data collection sensors to supply information to manage resources: (1) Collect GPS floating car data \cite{KENDZIORRA2016198}, (2) Use a real-time, micro-scale forecast algorithm \cite{trieber}, and (3) Use GPS to transmit individualized ``optimized'' driver instruction. Floating car data are  real time, tracking data of $u_{vehicle}(t)$ and  $x_{vehicle}(t)$, which are transmitted using wireless technology and stored on a central controller computer \cite{tarnoff}. A real-time micro-scale forecast algorithm provides ``optimized'' $u_{driver}(t)$ and  $x_{driver}(t)$, provided by the tracking data. The ``optimized'' data are transmitted to on-board control installed in a vehicle \cite{5gaa}. The hybrid car-following model is a  micro-scale model that can be adapted to this purpose. 
  
  The hybrid car-following model can be adapted to suit the needs of $ITS$. It can also be used to study traffic weaving and tailgating where  safety is a critical concern. People interested in pursuing these efforts by using the hybrid car-following model are encouraged to do so. It is available online under the name \textbf{cartools}, a computer package written in \textbf{R}  \cite{cran}.   \textbf{cartools} is short for hybrid car-following model. The  code can be downloaded from GitHub  \cite{pjo2018}. A vignette is also available \cite{cartools}. 
 
@@ -331,7 +331,7 @@ Moreover, doubling $\sigma_U$ to 10 mph results in gridlock. Hybrid car-followin
 
 \section{Summary}
 
-Classical principles of transportation engineering and statistics are coupled with deterministic and stochastic models are used to simulate traffic breakdown  using car-following framework. The most important assumptions and findings are:
+Classical principles of transportation engineering and statistics are coupled with deterministic and stochastic models  to simulate traffic breakdown  using a car-following framework. The most important assumptions and findings are:
 
 
 \begin{enumerate}
