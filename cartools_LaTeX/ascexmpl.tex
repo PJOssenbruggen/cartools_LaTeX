@@ -25,7 +25,7 @@
 \maketitle
 \begin{abstract} Traffic data are inherently noisy. As the name implies unwanted. Historically, traffic noise has been  treated as a nuisance variable and ignored. It is now possible to introduce the effects of noise into the decision-making process with the advent of high speed computing and advances in statistics. The principal goals of this paper is to predict and explain traffic breakdown at a bottleneck with the aid of a stochastic model. A Brownian motion model is at the core of the model development. It is introduced into a car-following model structure where driver group behavior is assumed to be root cause of breakdown. Results from a controlled experiment are used to sustain the assumption. This model and a deterministic traffic dynamics model are incorporated into a \emph{hybrid} model to investigate a bottleneck where a two-lane freeway merges into one lane. This framework allows us to analyze the driver group behavior as the drivers' approach, pass through with the option of passing other vehicles, and exit a bottleneck. Two merging protocols are investigated, the zipper and side-by-side merge. Average wait time for a side-by-side merge is estimated to be more than 4.5 times greater  than  a zipper merge. Since drivers' are self optimizers, implementing a zipper merge traffic control regulation as a matter of policy is deemed infeasible. The feasibility of adapting the hybrid car-following model into an $ITS$ control system and for traffic safety studies are discussed.
 \end{abstract}
-\KeyWords{Traffic breakdown, car-following, congestion, control, intelligent systems,  stochastic processes }
+\KeyWords{Traffic breakdown, car-following, congestion, control,\\ intelligent systems,  stochastic processes}
 %
      
 \section{Introduction}
@@ -35,12 +35,20 @@ Another goal of this paper is describe the breakdown process as simply as possib
 
 \emph{Why is it so difficult to explain and reliably predict traffic breakdown?} Traffic data are extremely noisy (volatile). Historically, researchers have treated noise as a nuisance variable. This is an eloquent  approach because their \emph{deterministic} models can explain fundamental relationship between speed, traffic density and flow. These methods give an incomplete explanation of traffic breakdown. The  research literature is rich with attempts to bring more clarity to solving this complex problem.  Factors explaining breakdown and its consequences include: speed volatility  \cite{WAGNER20121384}; vehicle clustering and density \cite{CASTILLO2001367}   \cite{GALTIER2012167} \cite{KISH2000271} \cite{MAHNKE20051} \cite{WEITS1992115}; driver behavior and headway distribution  \cite{OU2018105}; and capacity, delay, control and rerouting \cite{HU2018254} \cite{SMULDERS1990221} \cite{VODOPIVEC201722}. 
 
-In this paper, a concerted effort is made to introduce traffic noise into the analysis by using \emph{stochastic models}. Our effort requires that the breakdown process be dissected, analyzed and then resembled. The resulting model, which we call a \emph{hybrid car-following model,} consists of both deterministic and stochastic model components. This framework allows us to analyze the driver group behavior as the drivers' approach, pass through, pass other vehicles, and exit a bottleneck.
+In this paper, a concerted effort is made to introduce traffic noise into the analysis by using \emph{stochastic models}. Our effort requires that the breakdown process be dissected, analyzed and then resembled. The resulting model, which we call a \emph{hybrid car-following model,} consists of both deterministic and stochastic model components. This framework allows us to analyze the driver group behavior as the drivers' approach, pass through, pass other vehicles, and exit a bottleneck. The  \textbf{METHODS} section, which is devoted to mathematical modeling details,  is divided into two subsections:
+\begin{description}
+    \item \textbf{1. The Root Cause of Breakdown and Assumptions.} Topics include:  \emph{Driver Group Behavior and Merging Protocols}, \emph{A Controlled Experiment}, and \emph{A Stochastic Model of Speed}. 
+    \item \textbf{2. A Hybrid Car-Following Model Parts and Assembly.} Topics in the \underline{\underline{\emph{Parts}}} section include: \emph{A Brownian Bridge Model}, \emph{A Safe Car-Following Rule}, and \emph{A Time Varying Acceleration Model}. The main focus of \underline{\emph{Assembly}} section is  to describe  the development of a \emph{hybrid car-following model}.  Topics include: \emph{Simulating Reality} and \emph{Estimating Performance}.
+\end{description}
+The \textbf{DISCUSSION AND RESULTS} is devoted to practical matters associated with using the \emph{hybrid car-following model}. Topics include: \emph{Performance Benchmarks}, \emph{Traffic Management Strategies} and questions dealing with the integrity of the \emph{hybrid car-following model} and to demonstrating how  it used to estimate bottleneck delay and capacity. The \textbf{SUMMARY} section contains a brief list of  important assumptions and findings.
 
-The paper is organized as follows. The \textbf{METHODS} section consists of two sub-sections. The first sub-section deals with issues associated identifying the root cause  of traffic breakdown and the challenges associated modeling its behavior. Topics include:  \emph{Driver Group Behavior and Merging Protocols}, \emph{A Controlled Experiment}, and \emph{A Stochastic Model of Speed}. The second sub-section is entitled \textbf{A Hybrid Car-Following Model Parts and Assembly,} which contain topics on \emph{A Safe Car-Following Rule}, \emph{A Time Varying Acceleration Model}, \emph{Simulating Reality}, and \emph{Estimating Performance}. The \textbf{DISCUSSION AND RESULTS} section is devoted to answering a series of questions about  the integrity of the hybrid car-following model and to demonstrating how  it used to estimate bottleneck delay and capacity. Topics include: \emph{Performance Benchmarks} and \emph{Traffic Management Strategies}. The \textbf{SUMMARY} section lists the  important assumptions and findings.
+
+
 
 
 \section{Methods}
+
+\subsection{1. The Root Cause of Traffic Breakdown and Assumptions} 
 
 \subsubsection{Driver Group Behavior and Merging Protocols.} 
 
@@ -52,12 +60,12 @@ Two merging protocols are investigated: (1) the \emph{zipper merge} and (2) the 
 \begin{figure}
 \centering
 %\framebox[3.00in]{\rule[0in]{0in}{1.00in}}
-\includegraphics[width = 5.5in]{Rplot02.pdf}
+\includegraphics[width = 4.5in]{Rplot02.pdf}
 \caption{Schematic diagram of a bottleneck.}
 \label{schematic}
 \end{figure}
 
-A zipper merge in this paper is considered to be the gold standard of traffic operation at a bottleneck.  Traffic controlled  in this manner is analogous to  closing a jacket zipper, say. A jacket closes flawlessly because the rows of zipper teeth are the same size, move at the same speed, are evenly spaced and perfectly aligned to allow the two tapes to link together without jamming. From a traffic operations point of view, this is optimum. There is no jamming or delay. See the $t-x$ trajectory of Fig \ref{zip0}. Compare it to side-by-side merge of Fig \ref{sbs0} where drivers are delayed. The subscripts $A$ and $D$ denote  vehicle arrival and departure at locations $x_e$ and $x_0$, the bottleneck entry location and lane drop location, respectively. The ten vehicles traveling on lanes 1 and 2 are denoted by the red and blue lines. 
+A zipper merge in this paper is considered to be the gold standard of traffic operation at a bottleneck.  Traffic controlled  in this manner is analogous to  closing a jacket zipper, say. A jacket closes flawlessly because the rows of zipper teeth are the same size, move at the same speed, are evenly spaced and perfectly aligned to allow the two tapes to link together without jamming. From a traffic operations point of view, this is optimum. There is no jamming or delay shown by the $t-x$ trajectories of Fig \ref{zip0}. Compare it to side-by-side merge of Fig \ref{sbs0} where drivers are delayed. The subscripts $A$ and $D$ denote  vehicle arrival and departure at locations $x_e$ and $x_0$, the bottleneck entry location and lane drop location, respectively. The ten vehicles traveling on lanes 1 and 2 are denoted by the red and blue lines. 
 
 Drivers are assumed to be self optimizers.  They operate their vehicles to minimize their individual travel time, thus the group tends to be uncooperative and prone to drive side-by-side. At the same time, individual drivers do it safely to avoid traffic accidents. For example, drivers traveling on upstream parallel lanes drive side-by-side feel secure and feel safe driving in this manner. Tailgaters, obviously, feel safe driving this way. Whether or not a driver is a tailgater, one of the drivers must yield to avoid crashing when reaching a bottleneck. A side-by-side merge is deemed to be a sub-optimum form of driving because traffic is interrupted and drivers must decelerate.  
 
@@ -119,15 +127,18 @@ Both density and flow are modeled as $K(t)$ and $Q(t)$ diffusion models using fi
 A \emph{Brownian bridge} model, $U(t) = f(\bar{u},\sigma_U,W,k,t)$ where $W$ = white noise, explains breakdown for the ring road experiment. As will be shown presently, this model  serves our needs (1) to explain breakdown at a bottleneck and (2) to estimate measures of performance at a bottleneck. The discussion above suggests stochastic process models of $K(t)$ and $Q(t)$ are needed. In lieu of deriving $K(t)$ and $Q(t)$ models, we use a car-following simulation model, a \emph{hybrid car-following model}, sampling and $t-x$ trajectories to obtain the information that we need. 
 
  
-\subsection{A Hybrid Car-Following Model Parts and Assembly} 
+\subsection{2. A Hybrid Car-Following Model Parts and Assembly} 
 
-This section is divided into two subsections: \emph{Parts} and \emph{Assembly}. The \emph{Parts} subsection focuses on mathematical model details and the \emph{Assembly} subsection focuses on how the parts work together. Examples are provided to help explain how the individual models work and how the assembled model integrates these individual models to produce practical output and insight. The examples shown in Figures \ref{zip5} and \ref{sbs5} serve as precusors.  The $t-x$ trajectory plots are derived from the hybrid car-following model described in this section. They show the effects of speed volatility  using the two protocols. These $t-x$ trajectories are clearly different from the trajectories shown in Figures \ref{zip0} and \ref{sbs0}. Traffic breakdown at a bottleneck is complicated and difficult to predict because of the effects of speed volatility as well as other factors associated with merging.
+This section is divided into two subsections: \underline{\emph{Parts}} and \underline{\emph{Assembly}}. The \underline{\emph{Parts}} subsection focuses on mathematical model details and the \underline{\emph{Assembly}} subsection focuses on how the parts work together. Examples are provided to help explain how the individual models work and how the assembled model integrates these individual models to produce practical output and insight. 
 
-The trajectories shown in Figure \ref{bbmodel}, a simulation involving only a lead and a following vehicle, are used in  \emph{Parts} to explain how the hybrid car-following model works.
+The examples shown in Figures \ref{zip5} and \ref{sbs5} serve as precursors.  The $t-x$ trajectory plots are derived from the hybrid car-following model described in this section. They show the effects of speed volatility  using the two protocols. These $t-x$ trajectories are clearly different from the trajectories shown in Figures \ref{zip0} and \ref{sbs0}. Traffic breakdown at a bottleneck is complicated and difficult to predict because of the effects of speed volatility as well as other factors associated with merging.
+
+The trajectories shown in Figure \ref{bbmodel}, a simulation involving only a lead and a following vehicle, are used in  \underline{\emph{Parts}} to explain how the hybrid car-following model works.
 
 \vspace{0.1in}
 \noindent \emph{\underline{Parts} }
- The  hybrid car-following model consists of the following parts: (1)  a \emph{Brownian bridge} model and (2) a \emph{time-varying acceleration} model. A Brownian bridge model  takes advantage of the properties defined by \emph{Brownian motion} model or  \emph{Wiener process} \cite{iacus}. Vehicle speed is estimated as:
+\subsubsection{A Brownian Bridge Model.}
+ The  hybrid car-following model consists of the following parts: (1)  a \emph{Brownian bridge} model and (2) a \emph{time-varying acceleration} model. A Brownian bridge model  takes advantage of the properties defined by a \emph{Brownian motion} model or  \emph{Wiener process} \cite{iacus}. Vehicle speed is estimated as:
 
 \begin {equation}
 u(t)  = \bar{u} + \sigma_U \cdot \big\{ W(t) - t/T \big\} \label{eq:eq1}
@@ -147,7 +158,7 @@ x(t + \Delta t)  = x(t) + u(t) \cdot \Delta t  \label{eq:eq2}
 \label{bbmodel}
 \end{figure}
 
-Data sets of speeds and locations for an \emph{individual} driver or vehicle $v$ are straightforwardly obtained by specifying $t = \{0,t_1,t_2,\ldots,T = t_{end}\}$, $u = \bar{u}$, $\sigma_U$ and $\Delta t$. Before proceeding, consider the two Brownian bridge speed traces of Figure \ref{bbmodel}.  The initial speed  and standard deviation  of $u$ = 53.1 mph and $\sigma_U$ = 5 mph are assigned to a lead and following vehicle. This simulation shows the lead vehicle starts to accelerate at $t$ = 0 and then decelerate at 10 seconds. The vehicle reaches a top speed at around 25 seconds, it decelerates and then returns to its initial speed of 53.1 mph.  A smooth curve drawn through the trace would more realistically depict how a driver would drive. This step is deemed unnecessary.
+Data sets of speeds and locations for an \emph{individual} driver or vehicle $v$ are straightforwardly obtained by specifying $t = \{0,t_1,t_2,\ldots,T = t_{end}\}$, $u = \bar{u}$, $\sigma_U$ and $\Delta t$. Before proceeding, consider the two Brownian bridge speed traces of Figure \ref{bbmodel}.  The initial speed  and standard deviation  of $u$ = 53.1 mph and $\sigma_U$ = 5 mph are assigned to a lead and following vehicle. This simulation shows the lead vehicle starts to accelerate at $t$ = 0 and then decelerates at 10 seconds. The vehicle reaches a top speed at around 25 seconds, it decelerates and then returns to its initial speed of 53.1 mph.  A smooth curve drawn through the trace would more realistically depict how a driver would drive. This step is deemed unnecessary.
 
 The $t-x$ trajectory for this vehicle is relatively smooth despite the jagged  speed trace. The dashed line, a reference line, shows the vehicle trajectory  traveling at a constant speed of 53.1 mph. Another random draw from Eq.(\ref{eq:eq1}) is made for a second vehicle,  a following vehicle in this example. The $t-x$ trajectory of the following vehicle is similar to the lead vehicle. There is no interaction between the two vehicles. The driver of the following vehicle keeps a safe distance  to avoid a crash. 
 
@@ -169,10 +180,11 @@ Independent draws are made using Eq.(\ref{eq:eq1}), thus the car-following traje
 \end{figure}
 
 
+For the hybrid car-following model to be of practical use, it is  most important to have a wide variety of drivers represented in a simulation.   Visual inspection  of Figure \ref{desire5} show multiple  \emph{desire-line trajectory} crossings. They must be corrected. A safe car-following rule  will be applied to each  trajectory pair to assure that all drivers drive safely. 
 
-For the hybrid car-following model to be of practical use, it is  most important to have a wide variety of drivers represented in a simulation.  See Figure \ref{desire5}. A safe car-following rule is applied to these drivers and to all drivers in a simulation. This is discussed in the \emph{Assembly} section. 
+Safe car-following rule is defined by the headway between a lead and a following vehicle, the distance between the front bumpers of the lead and following vehicles. A safe headway is determined by the function $h_{safe}(u_{lead}, l_{vehicle})$ where $u_{lead}$ and $l_{vehicle}$ are lead vehicle speed and vehicle length. Assuming a  speed of 20 mph, the safe headway is three vehicle lengths. In other words, the gap between vehicles, the distance the back and front bumpers,  is two vehicle lengths. At speed zero, the safe headway is two vehicle lengths.
 
-For safety, we apply the following conditions. The gap, the distance between lead vehicle and front bumper of the following vehicle, must be at least one-vehicle length for each ten mph. We denote it as $h_{safe}(u, l_{vehicle})$ where $u$ and $l_{vehicle}$ are speed and vehicle length. This rule applies everywhere except in the  merge zone. While the rule is simply enough to program, implementing it requires the rule to be applied differently in the upstream and downstream zones and to a variety of circumstances. Again, we defer this discussion to the \emph{Assembly} section. 
+This rule applies everywhere except in the  merge zone. While the rule is simply enough to program, implementing it requires the rule to be applied differently in the upstream and downstream zones and to a variety of circumstances. The qualitative effects of the rule are discussed next and the discussion of its implementation into the hybrid car-following model is deferred to the \underline{\emph{Assembly}} section. 
 
 \subsubsection{A Time Varying Acceleration Model.}
 
@@ -185,9 +197,9 @@ For safety, we apply the following conditions. The gap, the distance between lea
 \noindent where $a$ and $b$ are constants.  The smooth $t-x$ curve shown in Figure \ref{sbs0} is a good example of how a time varying acceleration model simulates driver behavior. 
 
 
-This model is used in all hybrid car-following model simulations. The $t-x$ simulation shown in Figures \ref{sbs0} through \ref{sbs5} uses this relationship. It is not used for desire-line trajectories shown in Figures \ref{bbmodel} and \ref{desire5}. 
+This model and safe car-following rule are used for all hybrid car-following model simulations. The $t-x$ simulation shown in Figures \ref{sbs0} through \ref{sbs5} uses these relationships. They are not used for desire-line trajectories as shown in Figures \ref{bbmodel} and \ref{desire5} for example. 
 
-Since a $x$ trajectory derived with the function is a smooth curve and tends to blend in, it is difficult to discern.  See Figure \ref{zip5}. The trajectory of vehicle (2,1) from between $t_1 \simeq$ 20 and $t_2 \simeq$ 28 seconds suggests the vehicle is closing in on vehicle (1,1) and must slowdown to avoid a crash over this time range. Stated another way, a correction is needed to disallow the desire-line of the following vehicle to cross the desire-line of the lead vehicle or have both of them become too close together over the range from  $t_1$ to $t_2$. These times, $t_1$ and $t_2$, for a following vehicle violation are determined with the aid of the safe car-following rule. The next question is how do we draw a $t_x$ trajectory for the following vehicle?  Having values $a$ and $b$, then it is a straightforward procedure. 
+Since a $x$ trajectory derived with the function is a smooth curve and tends to blend in, it is difficult to discern.  For example, see Figure \ref{zip5}. The trajectory of vehicle (2,1) from between $t_1 \simeq$ 20 and $t_2 \simeq$ 28 seconds suggests the vehicle is closing in on vehicle (1,1) and must slowdown to avoid a crash over this time range. Stated another way, a correction is needed to disallow the desire-line of the following vehicle to cross the desire-line of the lead vehicle or have both of them become too close together over the range from  $t_1$ to $t_2$. These times, $t_1$ and $t_2$, for a following vehicle violation are determined with the aid of the safe car-following rule. The next question is how do we draw a $t_x$ trajectory for the following vehicle?  Having values $a$ and $b$, then it is a straightforward procedure. 
 
 How  are the constants $a$ and $b$ estimated? We need two equations to solve for the two unknowns. By integrating Eq.(\ref{eq:eq3}), speed and location equations are obtained, which we denote as $u(a,b,t)$ and $x(a,b,t)$. Given the start and end times $t_1$ and $t_2$, we can estimate the start speed $u_1$, end speed $u_2$, start location $x_1$ and end location $u_2$ for the following vehicle at these times. :
 
@@ -258,19 +270,17 @@ x_2 &=& x_1 + u_1 \cdot dt + \frac{a}{2}  \cdot dt^2 - \frac{b}{6} \cdot dt^3
 \noindent\emph{\underline{Assembly}}
 Desire-lines  are critically important to the operation of the hybrid car-following model. If desire-lines of the lead and following vehicles do not cross, then a crash does not take place and no action is taken. If they cross or are too close together, then a correction is made to secure \emph{safety.} Our immediate task to detect the start and end times, $t_1$ and $t_2$, when a safety violation occurs for each lead-following vehicle pair.
 
-%How are these conditions detected? Start by inspecting the scatter plot of Figure \ref{zip5} and the cluster of points around the point $(\bar{k}_D, \bar{q}_D)$ and $k_{D_1},k_{D_2} \ldots,k_{D_9}$ and $q_{D_1},q_{D_2} \ldots,q_{D_9}$. 
-
-These times depend on the departure times when vehicles depart the merge zone and enter the downstream zone when vehicle spacing and speed are so vitally important to \emph{safety.} Drivers do not know when they will reach the bottleneck location $x_0$.  These times are treated as random variables: $T_1, T_2,\ldots,T_{10}$.  We denote them as the \emph{actual} arrival times and treat them as unknowns. These times are not the arrival  times the drivers want (\emph{desire}).  They will plan their trip to arrive at times: $T^*_1, T^*_2,\ldots,T^*_{10}$. We call them \emph{desire} arrival times and treat them as knowns because they are obtained by drawing from Eq. \ref{eq:eq1}. The  $T_{vehicle}$ and $T_{vehicle}^*$ times will, most likely, not match.  The  $T_{vehicle}$  times are modified   $T_{vehicle}^*$ times and are affected by uncertainty and the safe car-following rule. Uncertainties associated with (1) drivers,  who drive in front of them on \emph{their travel lane}, and with (2) drivers, who drive in front of them when they \emph{merge.}
+These times depend on the departure times when vehicles depart the merge zone and enter the downstream zone when vehicle spacing and speed are so vitally important to \emph{safety.} Drivers do not know when they will reach the bottleneck location $x_0$.  These times are treated as random variables: $T_1, T_2,\ldots,T_{10}$.  We denote them as the \emph{actual} arrival times and treat them as unknowns. These times are not the arrival  times the drivers want (\emph{desire}).  They will plan their trip to arrive at times: $T^*_1, T^*_2,\ldots,T^*_{10}$. We treat the \emph{desire} arrival times  as knowns because they are obtained by drawing from Eq. \ref{eq:eq1}. The  $T_{vehicle}$ and $T_{vehicle}^*$ times will, most likely, not match.  The  $T_{vehicle}$  times are modified   $T_{vehicle}^*$ times and are affected by uncertainty and the safe car-following rule. Uncertainties associated with (1) drivers,  who drive in front of them on \emph{their travel lane}, and with (2) drivers, who drive in front of them when they \emph{merge.}
 
 How does the hybrid car-following model find these times? The  \emph{desire}  times  $T_{vehicle}^*$ are determined by chance. As mentioned, draws from the Brownian bridge model of Eq.(\ref{eq:eq1}) that are stored in a $\mathbf{T}$ matrix. The matrix contains the $T_{vehicle}^*$ values, which will be identified, and  information about a vehicle's speed $u$ and location $x$ over the time range from $t_{start}$ to $t_{end}$. Using a time step of $\Delta t$ = 0.125 seconds for start time $t_{start} = 0$ to end time $t_{end} = 40$ seconds, $\mathbf{T}$  is a  321 $\times$ 21 matrix given $n$ = 10 vehicles with  $u(t)$ and $x(t)$ recordings for each vehicle.  The information in $\mathbf{T}$ may contain desire-lines that violate the safe car-following rule. 
 
-Violations must be identified and corrected. The corrected information, which is found in a step-wise fashion,  is stored in matrices $\mathbf{T1}$, $\mathbf{T2}$, $\mathbf{TF1}$, $\mathbf{TF2}$ and $\mathbf{TF}$; matrices with the same dimension as $\mathbf{T}$. $\mathbf{1}$ and $\mathbf{2}$ refer to the lane numbers and $\mathbf{F}$ means \emph{fixed}.  In other words, corrected information that satisfies the safe car-following rule.  The flow chart of Figure \ref{flow} outlines the procedure in finding the  $T_{vehicle}$ values and \emph{fixing} the $t-x$ trajectories that violate the safe car-following rule.
+Violations must be identified and corrected. The corrected information, which is found in a step-wise fashion,  is stored in matrices $\mathbf{T1}$, $\mathbf{T2}$, $\mathbf{TF1}$, $\mathbf{TF2}$ and $\mathbf{TF}$; matrices with the same dimension as $\mathbf{T}$. $\mathbf{1}$ and $\mathbf{2}$ refer to the lane numbers and $\mathbf{F}$ means \emph{fixed}, corrected information that satisfy the safe car-following rule.  The flow chart of Figure \ref{flow} outlines the procedure in finding the  $T_{vehicle}$ values and \emph{fixing} the $t-x$ trajectories that violate the safe car-following rule.
 
 \begin{description}
 \item [ Desire-Line Generator] produces a $\mathbf{T}$ matrix for $n$ =10 vehicles. $\mathbf{T}$ contains $n$ = 10     unknown values of $T_{vehicle}^*$.  
 \item [ Arrival Analyzer] sorts the information of $\mathbf{T}$ by lane number and stores it in $\mathbf{T1}$ and  $\mathbf{T2}$. Figure \ref{desire5} shows the desire-lines by lane.
 \item [ Lane Analyzer] independently inspects each following vehicle for safety violations from $\mathbf{T1}$ and  $\mathbf{T2}$. If a violation is found over some time range, the violation is corrected or fixed using the Time Varying Acceleration Model procedure given previously in the \textbf{Methods} section.  The information of $u(t)$ and $x(t)$  are replaced and stored in   the appropriate matrix $\mathbf{TF1}$ or  $\mathbf{TF2}$. Figure \ref{cfeffects5} shows the trajectories after applying the safe car-following rule.
-\item [ Merge Analyzer] merges the information in $\mathbf{TF1}$ or  $\mathbf{TF2}$. First, by ordering vehicle arrivals by arrival time at $x_0$ and stores them in $\mathbf{TF}$. The matrix contains values of  $T^*_1, T^*_2,\ldots,T^*_{10}$. Note that these values are  not the same ones found in the Desire-Line Generator, they are corrected. Second, after performing similar steps to those given for the  Lane Analyzer step, corrections are made. This second set of corrections are stored in $\mathbf{TF}$. This matrix contains $T_1, T_2,\ldots,T_{10}$, the departure times from the bottleneck at $x_0$.  Figure \ref{sbs5} shows the trajectories after applying the safe car-following rule after merging.
+\item [ Merge Analyzer] merges the information in $\mathbf{TF1}$ or  $\mathbf{TF2}$. First, by ordering vehicle arrivals by arrival time at $x_0$ and stores them in $\mathbf{TF}$. The matrix contains values of  $T^*_1, T^*_2,\ldots,T^*_{10}$. Note that these values are  not the same ones found in the Desire-Line Generator, they are corrected. Second, after performing similar steps to those given for the  Lane Analyzer step, corrections are made. This second set of corrections are stored in $\mathbf{TF}$. This matrix contains $T_1, T_2,\ldots,T_{10}$, the departure times from the bottleneck at $x_0$.  Figure \ref{sbs5}, for example, shows the trajectories after applying the safe car-following rule after merging.
 
 The $T_1, T_2,\ldots,T_{10}$ times are special because drivers realize by the time they reach location $x_0$ that corrections must be completed to proceed safely. In other words, drivers take corrective action prior to reaching $x_0$ and before reaching $x_e$. This corrective action explains spillback.
 
@@ -285,7 +295,7 @@ Before discussing  measures of performance estimation, we feel it prudent to ans
 
  The ring-road experiment offers little doubt that vehicles that are closely spaced together cannot maintain a given speed and local queuing takes place and traffic breakdown occurs. The Brownian Bridge model successfully simulates this behavior. The model adds credence to the fact that speed volatility is strongly associated with driver group behavior. The Brownian Bridge model was  rigorously tested and found to satisfy fundamental principles of transportation engineering and match conditions observed in the field. 
  
- The hybrid car-following model uses the Brownian Bridge model as its base, adds the notion that drivers are self optimizers, and other features, like a safe car-following rule and the time varying acceleration model, that simulate driver behavior. This model  passes the same tests as the Brownian Bridge model for the ring road.
+ The hybrid car-following model uses the Brownian Bridge model as its base, adds the notion that drivers are self optimizers, and other features, like a safe car-following rule and the time varying acceleration model, to simulate driver behavior. This model  passes the same tests as the Brownian Bridge model for the ring road.
 
 \noindent \emph{How is the model calibrated? } 
 
@@ -350,7 +360,7 @@ The law of averages  is used to gain confidence in an estimate \cite{freedman}. 
 Consider the 95$\%$ C.I.  of wait time $w$ for a side-by-side merge, (3.4,17.6). A driver can be about 95$\%$ confident that his or her wait time will be somewhere in this range. On average, a driver can expect to wait 10.5 seconds. Given the alleged benefits of a zipper merge, it is not surprising that the the average wait time for a zipper merge of 7.9 seconds is less than the side-by-side merge. In addition, its  95$\%$ C.I. is tighter. However, these estimates are based on extremely noisy data. It could be the benefit associated with the zipper merge is a matter of chance. The pairs test will be used presently to address this concern. 
 
 
-Now, we turn our attention to estimating a bottleneck capacity using the relationship $c = max(q_A,q_D)$. After inspecting the table, we declare the $c$ = 1903 vph is the best estimate of capacity. The side-by-side merge is more beneficial than the zipper merge. Given the Highway Capacity Manual guidelines, the estimate seems reasonable. However, our confidence in this estimate is shaky given its 95$\%$ C.I. is (841, 2965). The volatility in the simulation data affects the decision.
+Now, we turn our attention to estimating a bottleneck capacity using the relationship $c = max(q_A,q_D)$. After inspecting the table, we declare the $c$ = 1903 vph is the best estimate of capacity. The side-by-side merge is more beneficial than the zipper merge. Given the Highway Capacity Manual guidelines, the estimate seems reasonable. However, our confidence in this estimate is shaky given its 95$\%$ C.I. is (841, 2965). The volatility in the simulation data may affect our final decision.
 
 
 \section{Discussion and Results}
@@ -383,10 +393,10 @@ Next, consider the  average departure speed is $\bar{u}_D$ = 44.2 mph. The avera
 \hline
  $u_D$  & 39.2 & 53.1 \\
  $k_D$  & 41.7& 60.0 \\
- $q_D$   & 2024&  3161 \\
+ $q_D$  & 2024&  3161 \\
  \hline
 $w$     & 7.6 &   6.4 \\
-$w'$     & 0.7 &  0  \\
+$w'$    & 0.7 &  0  \\
  \hline
 \hline
 \end{tabular}
